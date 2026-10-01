@@ -1,5 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using SchoolProject.Core;
+using SchoolProject.Infrastructure;
+using SchoolProject.Infrastructure.Abstracts;
 using SchoolProject.Infrastructure.Data;
+using SchoolProject.Infrastructure.Repositories;
+using SchoolProject.Service;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +18,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+#region Dependency Injection
+
+builder.Services.AddInfrastructureDependencies()
+    .AddServiceDependencies()
+    .AddCoreDependencies();
+
+#endregion
 
 var app = builder.Build();
 
