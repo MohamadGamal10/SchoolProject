@@ -26,10 +26,6 @@ namespace SchoolProject.Infrastructure.InfrastructureBases
         #endregion
 
 
-        #region Methods
-
-        #endregion
-
         #region Actions
         public virtual async Task<T> GetByIdAsync(int id)
         {

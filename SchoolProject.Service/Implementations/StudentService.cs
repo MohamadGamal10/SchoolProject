@@ -33,5 +33,22 @@ namespace SchoolProject.Service.Implementations
                 .FirstOrDefaultAsync();
             return student;
         }
+
+        public async Task<string> AddAsync(Student student)
+        {
+            // check if the is exist or not
+            var studentExist = _studentRepository.GetTableNoTracking()
+                .Where(x => x.Name.Equals(student.Name))
+                .FirstOrDefault();
+
+            if (studentExist != null)
+            {
+                return "Exist";
+            }
+
+            // added student
+            await _studentRepository.AddAsync(student);
+            return "Success";
+        }
     }
 }
